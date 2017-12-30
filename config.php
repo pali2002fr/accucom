@@ -1,8 +1,8 @@
 <?php
 return array (
 	'database' => array(
-		'dns' => 'mysql:host=localhost;port=8889;dbname=cache',
+		'dns' => 'mysql:host=localhost;dbname=cache',
 		'username' => 'root',
-		'password' => 'root'
+		'password' => 'Windows01234'
 	)
 );
