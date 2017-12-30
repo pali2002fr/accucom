@@ -1,0 +1,139 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		<script type="text/javascript" >
+			$(document).ready(function(){
+
+				$(document).on('click', '[button-id]', function(){
+					var id = $(this).attr('button-id');
+					
+					if($(this).attr('display-detail') == 'n'){
+						$('[button-id="'+ id +'"]').html('hide');
+						$('[detail-id="'+ id +'"]').removeClass('hidden');
+						$(this).attr('display-detail', 'y');
+					} else if($('[button-id="'+ id +'"]').attr('display-detail') == 'y'){
+						$('[button-id="'+ id +'"]').html('details');
+						$('[detail-id="'+ id +'"]').addClass('hidden');
+						$(this).attr('display-detail', 'n');
+					}
+				});
+
+				function details(data){
+					$('#list').append('<li item-id="' + data.id + '"></li>');
+					var html = '';
+					html = html.concat('<p>' + data.firstname + ' ' + data.lastname + '</p>');
+					html = html.concat('<p><button type= "button" button-id="' + data.id + '" display-detail="n">Details</button></p>');
+					
+					html = html.concat('<p detail-id="' + data.id + '" class="hidden"></p>');
+					html = html.concat('</li>');
+					$('[item-id="' + data.id + '"]').append(html);
+					var details = '<ul>';
+					details = details.concat('<li><b>firstname:</b>' + data.firstname + '</li>'); 
+					details = details.concat('<li><b>middlename:</b>' + data.middlename + '</li>'); 
+					details = details.concat('<li><b>lastname:</b>' + data.lastname + '</li>'); 
+					details = details.concat('<li><b>addressA:</b>' + data.addressA + '</li>');
+					details = details.concat('<li><b>addressB:</b>' + data.addressB + '</li>'); 
+					details = details.concat('<li><b>state:</b>' + data.state + '</li>');
+					details = details.concat('<li><b>age:</b>' + data.age + '</li>');
+					details = details.concat('<li><b>from:</b>' + data.from + '</li>');
+					details = details.concat('<li><b>to:</b>' + data.to + '</li>');
+					details = details.concat('<li><b>phone:</b>' + data.phone + '</li>');
+					details = details.concat('<li><b>timezone:</b>' + data.timezone + '</li>');
+					details = details.concat('<li><b>phone carrier:</b>' + data.phone_carrier + '</li>'); 
+					details = details.concat('<li><b>provider type:</b>' + data.provider_type + '</li>');
+					details = details.concat('</ul>');
+					$('[detail-id="' + data.id + '"]').append(details);
+
+				}
+
+			    $("#search").click(function(){
+			    	var phone = $("#phone").val();
+			    	var host = $("#host").val();
+			    	var username = $("#username").val();
+			    	var password = $("#password").val();
+			    	var interval = $("#interval").val();
+			    	if(phone.length === 0){
+			    		alert('Please type a phone number');
+			    	} else if(!host || !username || !password){
+			    		alert('Please type a infopay account details');
+			    	} else {
+			    		phoneExtracted = phone.match(/\d/g);
+			    	
+				        if(phoneExtracted.length===10){
+				        	var phone = areacode = phoneExtracted;
+							var areacode = areacode.slice(0,3).join('');
+							var phone = phone.slice(3,10).join('');
+
+				        	$.get("../index.php", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
+						        var res = JSON.parse(data);
+						        if(res.total == 0){
+						        	$('#result').html('');
+						        	$('#result').html(res.result.info);
+						        } else {
+						        	res.result.forEach(details);
+						        	
+						        	if(res.total == 1){
+						        		$( "[button-id]" ).click();
+							        }
+							        
+						        }
+						    });			        
+				        }
+			    	}
+			    });
+			});
+		</script>
+		<style>
+			.hidden {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form>
+			<fieldset>
+				<legend>Infopay Account:</legend>
+				<label for="username">
+					Username:
+					<input type"text" id="username" name="username" value="accucomtest"/>
+				</label>
+				<label for="password">
+					Password:
+					<input type"text" id="password" name="password" value="test104"/>
+				</label>
+				<br/>
+				<label for="host">
+					Host:
+					<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="100"/>
+				</label>
+			</fieldset>
+			<br/>
+			<fieldset>
+				<legend>Search:</legend>
+				<label for="phone">
+					Phone:
+					<input type"text" id="phone" name="phone" value="6178755813"/>
+				</label>
+				<label for="interval">
+					Cache:
+					<select id="interval" name="interval">
+						<option value="1 MINUTE">1 minute</option>
+						<option value="5 MINUTE">5 minutes</option>
+						<option value="15 MINUTE">15 minutes</option>
+						<option value="30 MINUTE">30 minutes</option>
+						<option value="1 HOUR">1 hour</option>
+					</select>
+				</label>
+				<button type="button" id="search" name="search" >search</button>
+			</fieldset>
+		</form>
+		<span id="result">
+			<ul id="list"></ul>
+		</li>
+		</span>
+	</body>
+</html>
+
+
