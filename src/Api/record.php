@@ -68,19 +68,22 @@ Class Record {
    public function search(){
 
    		$xml = file_get_contents( $this->url . '&areacode='. $this->getAreacode() . '&phone=' . $this->getPhone() );
-   		$result = new SimpleXMLElement($xml);
-   		if($result === 'invalid login'){
+
+   		if($xml === 'invalid login' || !$xml){
    			return [
-					'success' => true,
-					'error' => true,
-					'message' => 'invalid login'
-				];
-   		} else if($result->errors){
+				'success' => true,
+				'error' => true,
+				'message' => $xml
+			];
+   		}
+
+   		$result = new SimpleXMLElement($xml);
+   		if($result->errors){
 			return [
-					'success' => true,
-					'error' => true,
-					'message' => (array) $result->errors
-				];
+				'success' => true,
+				'error' => true,
+				'message' => (array) $result->errors
+			];
 		} else {
 			$records = (array) $result;
 			return array(
