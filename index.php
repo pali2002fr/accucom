@@ -36,8 +36,9 @@ if(!$d){
 	$call->setAreacode($areacode);
 	$d = $call->search(); 
 
-	$interval = "1 MINUTE";
-	$cache->setRecord($areacode . $phone, json_encode($d, true), $interval);
+	if($interval !== 'NO'){
+		$cache->setRecord($areacode . $phone, json_encode($d, true), $interval);
+	}
 	echo json_encode($d);
 } else {
 	echo $d;
