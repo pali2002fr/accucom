@@ -69,8 +69,13 @@ Class Record {
 
    		$xml = file_get_contents( $this->url . '&areacode='. $this->getAreacode() . '&phone=' . $this->getPhone() );
    		$result = new SimpleXMLElement($xml);
-
-   		if($result->errors){
+   		if($result === 'invalid login'){
+   			return [
+					'success' => true,
+					'error' => true,
+					'message' => 'invalid login'
+				];
+   		} else if($result->errors){
 			return [
 					'success' => true,
 					'error' => true,

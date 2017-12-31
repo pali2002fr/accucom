@@ -67,8 +67,9 @@
 
 				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
 						        var res = JSON.parse(data);
-						        if(res.total == 0){
-						        	$('#result').html('');
+						        if(!res.success){
+						        	$('#result').html(res.message);
+						        } else if(res.total == 0){
 						        	$('#result').html(res.result.info);
 						        } else {
 						        	res.result.forEach(details);
@@ -78,7 +79,10 @@
 							        }
 							        
 						        }
-						    });			        
+						    }).fail(function() {
+							    $('#result').html('Error!');
+						        $('#result').html(res.message);
+							});			        
 				        }
 			    	}
 			    });
@@ -131,7 +135,6 @@
 		</form>
 		<span id="result">
 			<ul id="list"></ul>
-		</li>
 		</span>
 	</body>
 </html>
