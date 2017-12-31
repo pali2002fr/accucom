@@ -7,13 +7,12 @@ use \SimpleXMLElement;
 Class Record {
 	private $phone;
 	private $areacode;
-	//const URL = "https://www.infopay.com/phptest_phone_xml.php?username=accucomtest&password=test104";
 	private $url;
 	private $username;
 	private $password;
 
-	function __construct($url, $username, $password){
-		$this->url = $url . '?username=' . $username . '&password=' . $password; 
+	function __construct($host, $username, $password){
+		$this->url = $host . '?username=' . $username . '&password=' . $password; 
    }
 
    public function getPhone(){
@@ -66,32 +65,45 @@ Class Record {
    }
 
    public function search(){
-
-   		$xml = file_get_contents( $this->url . '&areacode='. $this->getAreacode() . '&phone=' . $this->getPhone() );
-
-   		if($xml === 'invalid login' || !$xml){
-   			return [
-				'success' => true,
-				'error' => true,
-				'message' => $xml
+   		try{
+   			$xml = file_get_contents( $this->url . '&areacode='. $this->getAreacode() . '&phone=' . $this->getPhone() );
+	   		switch($xml){
+	   			case 'invalid login': return [
+										'success' 	=> true,
+										'error' 	=> true,
+										'message' 	=> $xml
+									];
+									break;
+				case null: 	return [
+								'success' 	=> true,
+								'error' 	=> true,
+								'message'	=> 'invalid'
+							];
+							break;
+				default: $result = new SimpleXMLElement($xml); 
+			   		if($result->errors){
+						return [
+							'success' 	=> true,
+							'error' 	=> true,
+							'message' 	=> (array) $result->errors
+						];
+					} else {
+						$records = (array) $result;
+						return array(
+							'success' 	=> true,
+							'error' 	=> false,
+							'result'	=> $this->prepareRecord($records['record']),
+							'total' 	=> is_array($records['record']) ? count($records['record']) : 0
+						);
+					}
+	   		}
+   		catch(Exception $e) {
+		  	return [
+				'success' 	=> true,
+				'error' 	=> true,
+				'message' 	=> $e->getMessage()
 			];
-   		}
-
-   		$result = new SimpleXMLElement($xml);
-   		if($result->errors){
-			return [
-				'success' => true,
-				'error' => true,
-				'message' => (array) $result->errors
-			];
-		} else {
-			$records = (array) $result;
-			return array(
-				'success' => true,
-				'error' => false,
-				'result' => $this->prepareRecord($records['record']),
-				'total' => is_array($records['record']) ? count($records['record']) : 0
-			);
 		}
+   		
    }
 }
