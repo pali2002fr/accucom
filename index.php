@@ -36,7 +36,7 @@ if($interval === 'NO'){
 	$call->setPhone($phone);
 	$call->setAreacode($areacode);
 	$d = $call->search();
-	echo $d;
+	echo json_encode($d);
 } else {
 	//Cache the result.
 	$cache = new Model();
