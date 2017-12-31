@@ -65,7 +65,7 @@
 							var areacode = areacode.slice(0,3).join('');
 							var phone = phone.slice(3,10).join('');
 
-				        	$.get("../index.php", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
+				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
 						        var res = JSON.parse(data);
 						        if(res.total == 0){
 						        	$('#result').html('');
