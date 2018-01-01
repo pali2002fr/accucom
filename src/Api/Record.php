@@ -42,7 +42,7 @@ Class Record {
 	   			$return[$k] = $this->createRecordEntity($k, $v);
 	   		}
 		}
-
+error_log(print_r($return, TRUE));  die;
    		return $return;
    }
 
