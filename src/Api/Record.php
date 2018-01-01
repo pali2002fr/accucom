@@ -74,7 +74,7 @@ Class Record {
 										'message' 	=> $xml
 									];
 									break;
-				case null: 	return [
+				case '': 	return [
 								'success' 	=> true,
 								'error' 	=> true,
 								'message'	=> 'invalid'
@@ -97,6 +97,7 @@ Class Record {
 						);
 					}
 	   		}
+	   	}	
    		catch(Exception $e) {
 		  	return [
 				'success' 	=> true,
