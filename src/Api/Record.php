@@ -34,7 +34,7 @@ Class Record {
    private function prepareRecord($result){
    		$return = array();
    		
-   		$count = $result->stats->rows;
+   		$count = (int) $result->stats->rows;
 		if($count == 1){
 			$return[0] = $this->createRecordEntity(0, $result->record);
 		} else {
@@ -94,7 +94,7 @@ Class Record {
 							'success' 	=> true,
 							'error' 	=> false,
 							'result'	=> $this->prepareRecord($result),
-							'total' 	=> $result['stats']['rows']
+							'total' 	=> (int) $result->stats->rows
 						);
 					}
 	   		}
