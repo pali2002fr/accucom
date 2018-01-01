@@ -3,20 +3,20 @@
 namespace Entity;
 
 Class Record {
-   private $id;
-	private $firstname;
-   private $middlename;
-   private $lastname; 
-   private $addressA;
-   private $addressB;
-   private $state;
-   private $age;
-   private $from;
-   private $to; 
-   private $phone;
-   private $timezone;
-   private $phone_carrier; 
-   private $provider_type;
+   public $id;
+	public $firstname;
+   public $middlename;
+   public $lastname; 
+   public $addressA;
+   public $addressB;
+   public $state;
+   public $age;
+   public $from;
+   public $to; 
+   public $phone;
+   public $timezone;
+   public $phone_carrier; 
+   public $provider_type;
 
 
 	function __construct($id = 0, $firstname, $middlename, $lastname, $addressA, $addressB, $state, $age, $from, $to, $phone, $timezone, $phone_carrier, $provider_type, $info){
