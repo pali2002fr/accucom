@@ -71,17 +71,14 @@
 						        	$('#result').html('');
 						        	$('#result').html(res.message);
 						        } else {
-						        	$('#result').html('');
+						        	$('#list').html('');
 						        	res.result.forEach(details);
 						        	
 						        	if(res.total == 1){
-						        		console.log(res.result[0].info.length);
 						        		if(res.result[0].info.length > 0){
-						        			console.log('info');
-						        			//$('#result').html('');
-						        			//$('#result').html(res.result[0].info);
+						        			$('#result').html('');
+						        			$('#result').html(res.result[0].info);
 						        		} else {
-						        			console.log('no info');
 						        			$( "[button-id]" ).click();
 						        		}
 							        }
