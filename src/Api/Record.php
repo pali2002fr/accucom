@@ -36,7 +36,7 @@ Class Record {
    		
    		$count = (int) $result->stats->rows;
 		if($count == 1){
-			error_log(print_r($result->record->middlename, TRUE));  die;
+			error_log(print_r((string) $result->record->middlename, TRUE));  die;
 			$return[0] = $this->createRecordEntity(0, $result->record);
 		} else {
 			foreach($result->record as $k => $v){
