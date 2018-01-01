@@ -38,11 +38,11 @@ Class Record {
 		if($count == 1){
 			$return[0] = $this->createRecordEntity(0, $result->record);
 		} else {
-			foreach($result->record as $k => $v){
+			foreach((array) $result->record as $k => $v){
 	   			$return[$k] = $this->createRecordEntity($k, $v);
 	   		}
 		}
-error_log(print_r($return, TRUE));  die;
+
    		return $return;
    }
 
