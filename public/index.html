@@ -75,7 +75,7 @@
 						        	res.result.forEach(details);
 						        	
 						        	if(res.total == 1){
-						        		if(res.result.0.info.length > 0){
+						        		if(res.result[0].info.length > 0){
 						        			$('#result').html('');
 						        			$('#result').html(res.result[0].info);
 						        		} else {
