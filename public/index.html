@@ -67,7 +67,7 @@
 
 				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
 						        var res = JSON.parse(data);
-						        if(!res.success){
+						        if(res.error){
 						        	$('#result').html(res.message);
 						        } else if(res.total == 0){
 						        	$('#result').html(res.result.info);
@@ -80,9 +80,10 @@
 							        
 						        }
 						    }).fail(function() {
-							    $('#result').html('Error!');
-						        $('#result').html(res.message);
+						        $('#result').html('Error: ' + res.message);
 							});			        
+				        } else {
+						    $('#result').html('Error: Invalid Phone');
 				        }
 			    	}
 			    });
