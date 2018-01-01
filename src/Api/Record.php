@@ -38,7 +38,7 @@ Class Record {
 	   			$return[$k] = $this->createRecordEntity($k, $v);
 	   		}
    		} else {
-   			$return = $this->createRecordEntity(null, $result);
+   			$return[0] = $this->createRecordEntity(0, $result);
    		}
 
    		return $return;
@@ -93,7 +93,7 @@ Class Record {
 							'success' 	=> true,
 							'error' 	=> false,
 							'result'	=> $this->prepareRecord($records['record']),
-							'total' 	=> is_array($records['record']) ? count($records['record']) : 0
+							'total' 	=> count($records['record']) 
 						);
 					}
 	   		}

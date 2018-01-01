@@ -69,8 +69,6 @@
 						        var res = JSON.parse(data);
 						        if(res.error){
 						        	$('#result').html(res.message);
-						        } else if(res.total == 0){
-						        	$('#result').html(res.result.info);
 						        } else {
 						        	res.result.forEach(details);
 						        	
