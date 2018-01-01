@@ -33,13 +33,15 @@ Class Record {
 
    private function prepareRecord($result){
    		$return = array();
-   		if(is_array($result)){
-   			foreach($result as $k => $v){
+   		$count = $result->stats->rows;
+   		$result = (array) $result;
+		if($count == 1){
+			$return[0] = $this->createRecordEntity(0, $result);
+		} else {
+			foreach($result as $k => $v){
 	   			$return[$k] = $this->createRecordEntity($k, $v);
 	   		}
-   		} else {
-   			$return[0] = $this->createRecordEntity(0, $result);
-   		}
+		}
 
    		return $return;
    }
@@ -88,12 +90,11 @@ Class Record {
 							'message' 	=> (array) $result->errors
 						];
 					} else {
-						$records = (array) $result;
 						return array(
 							'success' 	=> true,
 							'error' 	=> false,
-							'result'	=> $this->prepareRecord($records['record']),
-							'total' 	=> count($records['record']) 
+							'result'	=> $this->prepareRecord($result),
+							'total' 	=> $result->stats->rows
 						);
 					}
 	   		}
