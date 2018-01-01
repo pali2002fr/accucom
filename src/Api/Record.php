@@ -32,6 +32,11 @@ Class Record {
    }
 
    private function prepareRecord($result){
+
+   	echo '<pre>';
+   	var_dump($result);
+   	echo '</pre>';
+   	die;
    		$return = array();
    		
    		$count = $result['stats']['rows'];
