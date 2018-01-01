@@ -33,8 +33,17 @@ Class Record {
 
    private function prepareRecord($result){
    		$return = array();
-   		
-   		$count = (int) $result->stats->rows;
+   		$c = 0;
+		foreach($result as $k => $v){
+			if($k != 'record') continue;
+   			$return[$c] = $this->createRecordEntity($c, $v);
+   			$c++;
+   		}
+
+
+
+
+/*
 		if($count == 1){
 			$return[0] = $this->createRecordEntity(0, $result->record);
 		} else {
@@ -43,7 +52,7 @@ Class Record {
 	   			$return[$k] = $this->createRecordEntity($k, $v);
 	   		}
 		}
-
+*/
    		return $return;
    }
 
