@@ -33,9 +33,7 @@ Class Record {
 
    private function prepareRecord($result){
 
-   	echo '<pre>';
-   	var_dump($result);
-   	echo '</pre>';
+   	error_log(print_r($result, TRUE)); 
    	die;
    		$return = array();
    		
