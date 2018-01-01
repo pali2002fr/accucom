@@ -68,16 +68,14 @@
 				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
 						        var res = JSON.parse(data);
 						        if(res.error){
-						        	$('#result').html('');
-						        	$('#result').html(res.message);
+						        	$('#list').html('<li>' + res.message + '</li>');
 						        } else {
 						        	$('#list').html('');
 						        	res.result.forEach(details);
 						        	
 						        	if(res.total == 1){
 						        		if(res.result[0].info.length > 0){
-						        			$('#result').html('');
-						        			$('#result').html(res.result[0].info);
+						        			$('#list').html('<li>' + res.result[0].info + '</li>');
 						        		} else {
 						        			$( "[button-id]" ).click();
 						        		}
