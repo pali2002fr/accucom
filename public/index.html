@@ -98,51 +98,63 @@
 			.hidden {
 				display: none;
 			}
+			#box {
+				width: 480px;
+				padding: ;
+			}
+			.center {
+			    margin: auto;
+			    width: 50%;
+			    border: 3px solid green;
+			    padding: 10px;
+			}
 		</style>
 	</head>
 
 	<body>
-		<form>
-			<fieldset>
-				<legend>Infopay Account:</legend>
-				<label for="username">
-					Username:
-					<input type"text" id="username" name="username" value="accucomtest"/>
-				</label>
-				<label for="password">
-					Password:
-					<input type"text" id="password" name="password" value="test104"/>
-				</label>
+		<div id="box" class="center">
+			<form>
+				<fieldset>
+					<legend>Infopay Account:</legend>
+					<label for="username">
+						Username:
+						<input type"text" id="username" name="username" value="accucomtest"/>
+					</label>
+					<label for="password">
+						Password:
+						<input type"text" id="password" name="password" value="test104"/>
+					</label>
+					<br/>
+					<label for="host">
+						Host:
+						<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="100"/>
+					</label>
+				</fieldset>
 				<br/>
-				<label for="host">
-					Host:
-					<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="100"/>
-				</label>
-			</fieldset>
-			<br/>
-			<fieldset>
-				<legend>Search:</legend>
-				<label for="phone">
-					Phone:
-					<input type"text" id="phone" name="phone" value="6178755813"/>
-				</label>
-				<label for="interval">
-					Cache:
-					<select id="interval" name="interval">
-						<option value="NO">None</option>
-						<option value="1 MINUTE">1 minute</option>
-						<option value="5 MINUTE">5 minutes</option>
-						<option value="15 MINUTE">15 minutes</option>
-						<option value="30 MINUTE">30 minutes</option>
-						<option value="1 HOUR">1 hour</option>
-					</select>
-				</label>
-				<button type="button" id="search" name="search" >search</button>
-			</fieldset>
-		</form>
-		<span id="result">
-			<ul id="list"></ul>
-		</span>
+				<fieldset>
+					<legend>Search:</legend>
+					<label for="phone">
+						Phone:
+						<input type"text" id="phone" name="phone" value="6178755813"/>
+					</label>
+					<label for="interval">
+						Cache:
+						<select id="interval" name="interval">
+							<option value="NO">None</option>
+							<option value="1 MINUTE">1 minute</option>
+							<option value="5 MINUTE">5 minutes</option>
+							<option value="15 MINUTE">15 minutes</option>
+							<option value="30 MINUTE">30 minutes</option>
+							<option value="1 HOUR">1 hour</option>
+						</select>
+					</label>
+					<button type="button" id="search" name="search" >search</button>
+				</fieldset>
+			</form>
+			<span id="result">
+				<ul id="list"></ul>
+			</span>
+		</div>
 	</body>
 </html>
 
