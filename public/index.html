@@ -71,6 +71,10 @@
 						        	$('#list').html('<li>' + res.message + '</li>');
 						        } else {
 						        	$('#list').html('');
+						        	$('#cache_age').html('');
+						        	if(data.expired_at){
+						        		$('#cache_age').html('data.expired_at');
+						        	}
 						        	res.result.forEach(details);
 						        	
 						        	if(res.total == 1){
@@ -130,7 +134,7 @@
 					<br/>
 					<label for="host">
 						Host:
-						<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="100%"/>
+						<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="50"/>
 					</label>
 				</fieldset>
 				<br/>
