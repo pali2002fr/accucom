@@ -67,7 +67,6 @@
 
 				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
 						        var res = JSON.parse(data);
-						        console.log(res);
 						        if(res.error){
 						        	$('#list').html('<li>' + res.message + '</li>');
 						        } else {
