@@ -30,7 +30,9 @@ Class Record {
    public function setPhone($phone){
    		$this->phone = $phone;
    }
-
+   /*
+	Create list of Record entity
+   */
    private function prepareRecord($result){
    		$return = array();
    		$c = 0;
@@ -42,6 +44,9 @@ Class Record {
    		return $return;
    }
 
+	/*
+	Create a Record entity
+   */
    private function createRecordEntity($k, $v){
 	   	return  new entity_record(
 	   		(int) $k, 
@@ -62,6 +67,9 @@ Class Record {
 		);
    }
 
+   /*
+	Reach Infopay api to look for any matching phone info
+   */
    public function search(){
    		try{
    			$xml = file_get_contents( $this->url . '&areacode='. $this->getAreacode() . '&phone=' . $this->getPhone() );
