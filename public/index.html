@@ -105,8 +105,11 @@
 			.center {
 			    margin: auto;
 			    width: 50%;
-			    border: 3px solid green;
 			    padding: 10px;
+			}
+
+			.right {
+			    float: right;
 			}
 		</style>
 	</head>
@@ -127,7 +130,7 @@
 					<br/>
 					<label for="host">
 						Host:
-						<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="100"/>
+						<input type"text" id="host" name="host" value="https://www.infopay.com/phptest_phone_xml.php" size="100%"/>
 					</label>
 				</fieldset>
 				<br/>
@@ -152,6 +155,7 @@
 				</fieldset>
 			</form>
 			<span id="result">
+				<p id="cache_age" class="right"></p>
 				<ul id="list"></ul>
 			</span>
 		</div>

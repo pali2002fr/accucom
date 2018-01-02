@@ -18,7 +18,7 @@ Class Record {
 	public function setRecord($key, $record, $interval = "5 MINUTE"){
 		try {
 	    	$interval = "DATE_ADD(now(), INTERVAL " . $interval .")";
-			$sql = "INSERT INTO `Records` (`phone`, `record`, `expired_at`) VALUES ('" . $key . "', '" . $record . "', " . $interval . ") ON DUPLICATE KEY UPDATE `record` = '" . $record . "', `expired_at` = " . $interval;
+			$sql = "INSERT INTO `Records` (`phone`, `record`, `created_at`, `updated_at`, `expired_at`) VALUES ('" . $key . "', '" . $record . "', now(), '0000-00-00 00:00:00', " . $interval . ") ON DUPLICATE KEY UPDATE `record` = '" . $record . "', `updated_at` = now(), `expired_at` = " . $interval;
 	    	$affectedRows = $this->db->exec($sql);
 		} catch(PDOException $ex) {
 		    echo "An Error occured!";
