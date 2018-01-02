@@ -58,7 +58,7 @@ if($interval === 'NO'){
 		$cache->setRecord($areacode . $phone, json_encode($d, true), $interval);
 		echo json_encode($d);
 	} else {
-		error_log(print_r($d,1));
+		error_log(print_r($d),1);
 		echo $d;
 	}
 }
