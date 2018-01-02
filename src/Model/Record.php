@@ -19,6 +19,8 @@ Class Record {
 		try {
 	    	$interval = "DATE_ADD(now(), INTERVAL " . $interval .")";
 			$sql = "INSERT INTO `Records` (`phone`, `record`, `created_at`, `updated_at`, `expired_at`) VALUES ('" . $key . "', '" . $record . "', now(), '0000-00-00 00:00:00', " . $interval . ") ON DUPLICATE KEY UPDATE `record` = '" . $record . "', `updated_at` = now(), `expired_at` = " . $interval;
+	    	error_log($sql  ,0);
+
 	    	$affectedRows = $this->db->exec($sql);
 		} catch(PDOException $ex) {
 		    echo "An Error occured!";
