@@ -53,6 +53,7 @@ if($interval === 'NO'){
 		'created_at' => null,
 		'updated_at' => null,
 		'expired_at' => null,
+		'remainder' => null,
 		'record' => $apiCall($host, $username, $password, $phone, $areacode)	
 	]);
 } else {

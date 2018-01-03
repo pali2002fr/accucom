@@ -73,7 +73,7 @@
 						        	$('#list').html('');
 						        	$('#cache_age').html('');
 						        	if(res.expired_at){
-						        		$('#cache_age').html(res.expired_at);
+						        		$('#cache_age').html('Expiring in 'res.remainder);
 						        	}
 						        	res.record.result.forEach(details);
 						        	
@@ -114,6 +114,7 @@
 
 			.both {
 			    float: both;
+			    font-size: 5px;
 			}
 		</style>
 	</head>
@@ -159,7 +160,7 @@
 				</fieldset>
 			</form>
 			<span id="result">
-				<span id="cache_age" class="both"></span>
+				<span id="cache_age" class="right"></span>
 				<ul id="list"></ul>
 			</span>
 		</div>
