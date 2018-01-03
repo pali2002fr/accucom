@@ -73,7 +73,7 @@
 						        	$('#list').html('');
 						        	$('#cache_age').html('');
 						        	if(res.expired_at){
-						        		$('#cache_age').html('Expiring in 'res.remainder);
+						        		$('#cache_age').html('Expiring in ' + res.remainder);
 						        	}
 						        	res.record.result.forEach(details);
 						        	
