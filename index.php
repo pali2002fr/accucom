@@ -49,6 +49,7 @@ $apiCall = function($host, $username, $password, $phone, $areacode){
 
 $remainder = function($expired_at){
 	$now = new DateTime("now");
+	$expired_at = new DateTime($expired_at);
 	$interval = $now->diff($expired_at);
 	return $interval->format("%h hours, %i minutes, %s seconds");
 };
