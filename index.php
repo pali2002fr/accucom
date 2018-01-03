@@ -26,6 +26,11 @@ if(!$host || !$username || !$password){
 	exit();
 }
 
+$decodeEncodeJson = function($data){
+	$data['record'] = json_decode($data['record'], true);
+	return json_encode($data, true);
+}
+
 $apiCall = function($host, $username, $password, $phone, $areacode){
  	try {
 	 	$call = new Api(
@@ -56,7 +61,7 @@ if($interval === 'NO'){
 		$cache->setRecord($areacode . $phone, $d, $interval);
 		$d = $cache->getRecord($areacode . $phone);
 	}
-	echo $d;
+	echo $decodeEncodeJson($d);
 }
 
 
