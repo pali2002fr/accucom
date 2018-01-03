@@ -52,17 +52,17 @@ $remainder = function($expired_at){
 	$now = new DateTime("now");
 	$expired_at = new DateTime($expired_at);
 	$interval = $now->diff($expired_at);
-	
+
 	$hours = $interval->format("%h");
 	$minutes = $interval->format("%i");
 	$seconds = $interval->format("%s");
-	if(!$hours){
+	if($hours > 0){
 		$remainder['hours'] = $hours . ' hours';
 	}
-	if(!$minutes){
+	if($minutes > 0){
 		$remainder['minutes'] = $minutes . ' minutes';
 	}
-	if(!$seconds){
+	if(!$seconds > 0){
 		$remainder['seconds'] = $seconds . ' seconds';
 	}
 	return join(', ', $remainder);
