@@ -27,7 +27,7 @@ Class Record {
 
 	public function getRecord($key){
 		try {
-	    	$stmt = $this->db->query("SELECT record, expired_at, created_at, updated_at, expired_at - now() as remainder FROM `Records` WHERE phone = '" . $key . "' AND expired_at >= now()");
+	    	$stmt = $this->db->query("SELECT record, expired_at, created_at, updated_at FROM `Records` WHERE phone = '" . $key . "' AND expired_at >= now()");
 	    	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	    	$res = $stmt->fetch();
 	    	if($res) {

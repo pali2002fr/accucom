@@ -45,7 +45,13 @@ $apiCall = function($host, $username, $password, $phone, $areacode){
  	catch(Exception $e){
  		echo 'Error: ' . $e->getMessage();
  	}
- };
+};
+
+$remainder = function($expired_at){
+	$now = new DateTime("now");
+	$interval = $now->diff($expired_at);
+	return $interval->format("%h hours, %i minutes, %s seconds");
+};
 
 if($interval === 'NO'){
 	//Do not cache the result.
@@ -67,6 +73,7 @@ if($interval === 'NO'){
 		$cache->setRecord($areacode . $phone, $d, $interval);
 		$d = $cache->getRecord($areacode . $phone);
 	}
+	$d['remainder'] = $remainder($d['expired_at']);
 	echo $decodeEncodeJson($d);
 }
 
