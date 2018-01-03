@@ -62,7 +62,7 @@ $remainder = function($expired_at){
 	if($minutes > 0){
 		$remainder['minutes'] = $minutes . ' minutes';
 	}
-	if(!$seconds > 0){
+	if($seconds > 0){
 		$remainder['seconds'] = $seconds . ' seconds';
 	}
 	return join(', ', $remainder);
