@@ -29,7 +29,7 @@ if(!$host || !$username || !$password){
 $decodeEncodeJson = function($data){
 	$data['record'] = json_decode($data['record'], true);
 	return json_encode($data, true);
-}
+};
 
 $apiCall = function($host, $username, $password, $phone, $areacode){
  	try {
