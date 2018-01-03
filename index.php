@@ -49,7 +49,12 @@ $apiCall = function($host, $username, $password, $phone, $areacode){
 
 if($interval === 'NO'){
 	//Do not cache the result.
-	echo json_encode($apiCall($host, $username, $password, $phone, $areacode));
+	echo json_encode([
+		'created_at' => null,
+		'updated_at' => null,
+		'expired_at' => null,
+		'record' => $apiCall($host, $username, $password, $phone, $areacode)	
+	]);
 } else {
 	//Cache the result.
 	$cache = new Model();
