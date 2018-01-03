@@ -65,21 +65,21 @@
 							var areacode = areacode.slice(0,3).join('');
 							var phone = phone.slice(3,10).join('');
 
-				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data, status){
+				        	$.get("/", {'areacode': areacode, 'phone': phone, 'host': host, 'username': username, 'password': password, 'interval': interval}, function(data){
 						        var res = JSON.parse(data);
-						        if(res.error){
-						        	$('#list').html('<li>' + res.message + '</li>');
+						        if(res.record.error){
+						        	$('#list').html('<li>' + res.record.message + '</li>');
 						        } else {
 						        	$('#list').html('');
 						        	$('#cache_age').html('');
 						        	if(data.expired_at){
 						        		$('#cache_age').html('res.expired_at');
 						        	}
-						        	res.result.forEach(details);
+						        	res.record.result.forEach(details);
 						        	
-						        	if(res.total == 1){
-						        		if(res.result[0].info.length > 0){
-						        			$('#list').html('<li>' + res.result[0].info + '</li>');
+						        	if(res.record.total == 1){
+						        		if(res.record.result[0].info.length > 0){
+						        			$('#list').html('<li>' + res.record.result[0].info + '</li>');
 						        		} else {
 						        			$( "[button-id]" ).click();
 						        		}
@@ -88,7 +88,7 @@
 						        }
 						    }).fail(function() {
 						    	$('#result').html('');
-						        $('#result').html('Error: ' + res.message);
+						        $('#result').html('Error: ' + res.record.message);
 							});			        
 				        } else {
 				        	$('#result').html('');

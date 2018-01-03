@@ -26,36 +26,35 @@ if(!$host || !$username || !$password){
 	exit();
 }
 
-if($interval === 'NO'){
-	//Do not cache the result.
-	$call = new Api(
-		$host,
-		$username,
-		$password
-	);
-	$call->setPhone($phone);
-	$call->setAreacode($areacode);
-	$d = $call->search();
-	echo json_encode($d);
-} else {
-	//Cache the result.
-	$cache = new Model();
-	$d = $cache->getRecord($areacode . $phone);
-
-	if(!$d){
-
-		$call = new Api(
+$apiCall = function($host, $username, $password, $phone, $areacode){
+ 	try {
+	 	$call = new Api(
 			$host,
 			$username,
 			$password
 		);
 		$call->setPhone($phone);
 		$call->setAreacode($areacode);
-		$d = $call->search(); 
+		return $call->search();
+ 	}
+ 	catch(Exception $e){
+ 		echo 'Error: ' . $e->getMessage();
+ 	}
+ };
 
+if($interval === 'NO'){
+	//Do not cache the result.
+	echo json_encode($apiCall($host, $username, $password, $phone, $areacode));
+} else {
+	//Cache the result.
+	$cache = new Model();
+	$d = $cache->getRecord($areacode . $phone);
+	if(!$d){
+		$d = $apiCall($host, $username, $password, $phone, $areacode); 
 		//Cache result in mysql
 		$d = json_encode($d, true);
 		$cache->setRecord($areacode . $phone, $d, $interval);
+		$d = $cache->getRecord($areacode . $phone);
 	}
 	echo $d;
 }

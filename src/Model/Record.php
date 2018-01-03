@@ -31,7 +31,7 @@ Class Record {
 	    	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	    	$res = $stmt->fetch();
 	    	if($res) {
-	    		return $res['record'];
+	    		return $res;
 	    	}
 		   	return false;
 		} catch(PDOException $ex) {
