@@ -48,10 +48,24 @@ $apiCall = function($host, $username, $password, $phone, $areacode){
 };
 
 $remainder = function($expired_at){
+	$remainder = [];
 	$now = new DateTime("now");
 	$expired_at = new DateTime($expired_at);
 	$interval = $now->diff($expired_at);
-	return $interval->format("%h hours, %i minutes, %s seconds");
+	
+	$hours = $interval->format("%h");
+	$minutes = $interval->format("%i");
+	$seconds = $interval->format("%s");
+	if(!$hours){
+		$remainder['hours'] = $hours . ' hours';
+	}
+	if(!$minutes){
+		$remainder['minutes'] = $minutes . ' minutes';
+	}
+	if(!$seconds){
+		$remainder['seconds'] = $seconds . ' seconds';
+	}
+	return join(', ', $remainder);
 };
 
 if($interval === 'NO'){
