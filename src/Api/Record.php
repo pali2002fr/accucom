@@ -2,34 +2,20 @@
 namespace Api;
 
 use Entity\Record as entity_record;
+use Entity\Phone;
+use Entity\PhoneInterface;
+use Entity\ApiaccountInterface;
 use \SimpleXMLElement;
 
 Class Record {
-	private $phone;
-	private $areacode;
 	private $url;
 	private $username;
 	private $password;
 
-	function __construct($host, $username, $password){
-		$this->url = $host . '?username=' . $username . '&password=' . $password; 
-   }
+	function __construct(ApiaccountInterface $apiCredentials){
+		$this->url = $apiCredentials->getHost() . '?username=' . $apiCredentials->getUsername() . '&password=' . $apiCredentials->getPassword(); 
+   	}
 
-   public function getPhone(){
-   		return $this->phone;
-   }
-
-   public function getAreacode(){
-   		return $this->areacode;
-   }
-
-	public function setAreacode($areacode){
-   		$this->areacode = $areacode;
-   }  
-
-   public function setPhone($phone){
-   		$this->phone = $phone;
-   }
    /*
 	Create list of Record entity
    */
@@ -70,9 +56,9 @@ Class Record {
    /*
 	Reach Infopay api to look for any matching phone info
    */
-   public function search(){
+    public function search(PhoneInterface $phone){
    		try{
-   			$xml = file_get_contents( $this->url . '&areacode='. $this->getAreacode() . '&phone=' . $this->getPhone() );
+   			$xml = file_get_contents( $this->url . '&areacode='. $phone->getAreacode() . '&phone=' . $phone->getPhone() );
 	   		switch($xml){
 	   			case 'invalid login': return [
 										'success' 	=> true,
@@ -110,6 +96,5 @@ Class Record {
 				'message' 	=> $e->getMessage()
 			];
 		}
-   		
    }
 }

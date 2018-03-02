@@ -1,0 +1,22 @@
+{
+    "name": "palitcha-tokey/accucom2",
+    "authors": [
+        {
+            "name": "pali2002fr",
+            "email": "pali2002fr@yahoo.fr"
+        }
+    ],
+    "require": {
+    	"phpunit/phpunit": "5.7",
+    	"guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "": "src/"
+        }
+    },
+    "scripts": {
+	    "test": "./vendor/bin/phpunit"
+	}
+}
