@@ -16,6 +16,7 @@
             <file>./tests/unit/EntityApiaccountTestCase.php</file>
             <file>./tests/functional/testApiTestCase.php</file>
             <file>./tests/functional/TestApiCachingTestCase.php</file>
+            <file>./tests/functional/EntityRecordTestCase.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -7,76 +7,49 @@ use Entity\Phone;
 
 class EntityPhoneTestCase extends TestCase
 {
-	/*
-    public function testApiSearch() {
-    	$host =  'https://www.infopay.com/phptest_phone_xml.php';
-		$username = 'accucomtest';
-		$password = 'test104';
-
-    	$i = new Api\Record($host, $username, $password);
-    	$i->setPhone('8755813');
-    	$i->setAreacode('617');
-    	
-    	var_dump($i->search()); 
-    	//var_dump($cache);
-    	//die;
-        //$this->assertTrue(true);
-    } 
-    */
+    protected $p;
+    public function setUp()
+    {
+        $areacode = 617;
+        $phone = 8755813;
+        $this->p = new Phone($areacode, $phone);
+    }
 
     //Phone
     public function testExpectedExceptionIsRaisedIfSetPhoneZero() {
         $this->expectException(\InvalidArgumentException::class);
-        $areacode = 0;
-        $phone = 8755813;
-        $p = new Phone($areacode, $phone);
-
+        $this->p->setPhone(0);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetPhoneNumericTooLong() {
         $this->expectException(\InvalidArgumentException::class);
-        $areacode = 617;
-    	$phone = 875565756;
-    	$p = new Phone($areacode, $phone);
-
+        $this->p->setPhone(875565756);
     	$this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetPhoneNotNumeric() {
         $this->expectException(\InvalidArgumentException::class);
-        $areacode = 617;
-        $phone = 'mynotnumericphonenumber';
-        $p = new Phone($areacode, $phone);
-
+        $this->p->setPhone('mynotnumericphonenumber');
         $this->fail('InvalidArgumentException was not raised');
     }
 
     //Areacode
     public function testExpectedExceptionIsRaisedIfSetAreacodeZero() {
         $this->expectException(\InvalidArgumentException::class);
-        $areacode = 0;
-        $phone = 8755813;
-        $p = new Phone($areacode, $phone);
-
+        $this->p->setAreacode(0);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetAreacodeNumericTooLong() {
         $this->expectException(\InvalidArgumentException::class);
-        $areacode = 1977;
-        $phone = 8755813;
-        $p = new Phone($areacode, $phone);
-
+        $this->p->setAreacode(1977);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetAreacodeNotNumeric() {
         $this->expectException(\InvalidArgumentException::class);
-        $areacode = 'mynotnumericareacodenumber';
-        $phone = 8755813;
-        $p = new Phone($areacode, $phone);
-
+        $this->p->setAreacode('mynotnumericareacodenumber');
         $this->fail('InvalidArgumentException was not raised');
     }
 }

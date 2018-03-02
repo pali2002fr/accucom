@@ -4,89 +4,68 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Entity\Apiaccount;
+use Config\Accucom;
 
 class EntityApiaccountTestCase extends TestCase
 {
+    protected $a;
+
+    public function setUp()
+    {
+        $host = Accucom::ACCUCOM_HOST;
+        $username = Accucom::ACCUCOM_USER;
+        $password = Accucom::ACCUCOM_PASS;
+        $this->a = new Apiaccount($host, $username, $password);
+    }
+
     //Host
     public function testExpectedExceptionIsRaisedIfSetHostToZero() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = 0;
-        $username = 'thisIsTheUsername';
-        $password = 'thisIsThePassword';
-        $h = new Apiaccount($host, $username, $password);
-
+        $this->a->setHost(0);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetHostToEmptyString() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = '';
-        $username = 'thisIsTheUsername';
-        $password = 'thisIsThePassword';
-        $h = new Apiaccount($host, $username, $password);
-
-    	$this->fail('InvalidArgumentException was not raised');
+        $this->a->setHost('');
+        $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetHostToNull() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = NULL;
-        $username = 'thisIsTheUsername';
-        $password = 'thisIsThePassword';
-        $h = new Apiaccount($host, $username, $password);
-
+        $this->a->setHost(NULL);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     //Username
     public function testExpectedExceptionIsRaisedIfSetUsernameToEmptyString() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = 'http://www.hostname.com';
-        $username = '';
-        $password = 'thisIsThePassword';
-        $h = new Apiaccount($host, $username, $password);
-
+        $this->a->setUsername('');
         $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetUsernameToNull() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = 'http://www.hostname.com';
-        $username = NULL;
-        $password = 'thisIsThePassword';
-        $h = new Apiaccount($host, $username, $password);
-
+        $this->a->setUsername(NULL);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     //Password
     public function testExpectedExceptionIsRaisedIfSetPasswordToEmptyString() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = 'http://www.hostname.com';
-        $username = 'thisIsTheUsername';
-        $password = '';
-        $h = new Apiaccount($host, $username, $password);
-
+        $this->a->setPassword('');
         $this->fail('InvalidArgumentException was not raised');
     }
 
     public function testExpectedExceptionIsRaisedIfSetPasswordToNull() {
         $this->expectException(\InvalidArgumentException::class);
-        $host = 'http://www.hostname.com';
-        $username = 'thisIsTheUsername';
-        $password = NULL;
-        $h = new Apiaccount($host, $username, $password);
-
+        $this->a->setUsername(NULL);
         $this->fail('InvalidArgumentException was not raised');
     }
 
     //All
     public function testInstanceOfApiaccountIsCreatedIfSetHostToWwwDotHostnameDotComAndSetUsernameToThisIsTheUsernameAndSetPasswordToThisIsThePassword() {
-        $host = 'http://www.hostname.com';
-        $username = 'thisIsTheUsername';
-        $password = 'thisIsThePassword';
-        $h = new Apiaccount($host, $username, $password);
-
+        $h = new Apiaccount(Accucom::ACCUCOM_HOST, Accucom::ACCUCOM_USER, Accucom::ACCUCOM_PASS);
         $this->assertInstanceOf(Apiaccount::class, $h);
     }
 }

@@ -6,22 +6,6 @@ use Config\Accucom;
 
 class TestApiCallTestCase extends BaseTestCase
 {
-
-
-/*
-    public function testGet()
-    {
-
-        $response = $this->http->request('GET', 'user-agent');
-        $this->assertEquals(200, $response->getStatusCode());
-        $contentType = $response->getHeaders()["Content-Type"][0];
-        $this->assertEquals("application/json", $contentType);
-        $userAgent = json_decode($response->getBody())->{"user-agent"};
-        $this->assertRegexp('/Guzzle/', $userAgent);
-    }
-*/    
-
-
     public function testAllParamsRight()
     {
         $query = [
